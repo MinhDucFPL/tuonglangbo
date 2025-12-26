@@ -3,365 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tương Làng Bợ | Tinh Hoa Đất Tổ</title>
+    <title>Tương Làng Bợ - Đặc Sản OCOP Phú Thọ</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- 1. CẤU HÌNH CHUNG (CORE STYLES) --- */
+        /* --- 1. SETTING GIAO DIỆN --- */
         :root {
-            --primary: #3c2622;      /* Nâu Cafe đậm */
-            --accent: #C62828;       /* Đỏ Gạch (Dấu ấn) */
-            --gold: #D4AF37;         /* Vàng Kim (Sang trọng) */
-            --bg-body: #FDFBF7;      /* Màu kem giấy dó */
+            --primary: #5D4037;    /* Nâu đất đậm */
+            --secondary: #8D6E63;  /* Nâu nhạt */
+            --accent: #C62828;     /* Đỏ tươi (CTA) */
+            --gold: #FFC107;       /* Vàng kim */
+            --bg-light: #FFFDE7;   /* Kem nhạt */
             --white: #ffffff;
-            --text: #2c2c2c;
-            --glass: rgba(255, 255, 255, 0.9);
+            --text: #333333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-body);
+            background-color: var(--bg-light);
             color: var(--text);
-            overflow-x: hidden; /* Chặn thanh cuộn ngang */
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary);
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--primary); }
+        
+        /* Container chuẩn */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Nút bấm CTA (Call To Action) */
+        .btn {
+            display: inline-block; padding: 15px 35px; border-radius: 50px;
+            text-transform: uppercase; font-weight: 700; letter-spacing: 1px;
+            transition: 0.3s; cursor: pointer; text-decoration: none; border: none;
         }
-
-        a { text-decoration: none; transition: 0.3s; }
-        ul { list-style: none; }
-
-        /* Nút bấm Premium */
-        .btn-gold {
-            background: linear-gradient(45deg, #D4AF37, #C5A028);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 0; /* Bo góc vuông vức sang trọng */
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-            display: inline-block;
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-            border: 1px solid transparent;
+        .btn-primary {
+            background: linear-gradient(to right, #C62828, #B71C1C);
+            color: white; box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
         }
-
-        .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(198, 40, 40, 0.5); }
+        
+        .btn-outline {
+            background: transparent; border: 2px solid var(--primary); color: var(--primary);
         }
+        .btn-outline:hover { background: var(--primary); color: white; }
 
-        /* --- 2. HEADER (MENU) --- */
+        /* Tiêu đề Section */
+        .section-header { text-align: center; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto;}
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; position: relative; display: inline-block; }
+        .section-header h2::after {
+            content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 10px auto 0;
+        }
+        .section-padding { padding: 80px 0; }
+
+        /* --- 2. HEADER & MOBILE MENU (ĐÃ FIX) --- */
         header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: 0.4s;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 15px 0;
+            background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000; transition: 0.3s;
         }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+        
+        .nav-menu { display: flex; gap: 30px; list-style: none; }
+        .nav-menu a { color: var(--text); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        .nav-menu a:hover { color: var(--accent); }
 
-        header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 50px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            backdrop-filter: blur(10px); /* Hiệu ứng kính mờ */
-        }
+        .hamburger { display: none; font-size: 1.8rem; color: var(--primary); cursor: pointer; }
 
-        .logo { font-size: 1.8rem; font-weight: 700; color: white; letter-spacing: 2px; }
-        header.scrolled .logo { color: var(--primary); }
-
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { color: white; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; position: relative; }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; background: var(--gold);
-            bottom: -5px; left: 0; transition: 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        header.scrolled .nav-links a { color: var(--primary); }
-
-        /* --- 3. HERO SECTION (PARALLAX) --- */
+        /* --- 3. HERO SECTION (FIX CHỮ CHÌM) --- */
         .hero {
-            height: 100vh;
-            background: url('https://dulichtaybac.vn/wp-content/uploads/2021/07/chum-tuong.jpg') no-repeat center center/cover;
-            background-attachment: fixed; /* Tạo hiệu ứng Parallax khi cuộn */
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            height: 90vh;
+            background: url('https://dulichtaybac.vn/wp-content/uploads/2021/07/chum-tuong.jpg') center/cover no-repeat fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            position: relative; margin-top: 60px; /* Tránh đè header */
         }
-
-        .hero-overlay {
-            position: absolute; top:0; left:0; width:100%; height:100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-        }
-
-        .hero-content { position: relative; z-index: 2; color: white; max-width: 800px; padding: 20px; }
+        .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); } /* Nền đen mờ 50% */
         
+        .hero-content { position: relative; z-index: 2; padding: 20px; }
+        
+        /* Box chữ nổi bật trên mọi nền */
+        .hero-title-box {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4); /* Hộp đen mờ */
+            padding: 10px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
+        }
         .hero-subtitle {
-            text-shadow: #ffffff 3px;
-            font-size: 1.2rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;
-            color: var(--white); display: block;
-        }
-        
-        .hero h1 { font-size: 4rem; margin-bottom: 30px; line-height: 1.2; }
-        
-        /* --- 4. ABOUT SECTION (CÂU CHUYỆN) --- */
-        .section-padding { padding: 100px 10%; }
-        
-        .about-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+            color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
+            text-shadow: 1px 1px 2px black;
         }
 
-        .about-img-box { position: relative; }
-        .about-img-box img { width: 100%; border-radius: 5px; box-shadow: 20px 20px 0px var(--gold); }
+        .hero h1 {
+            color: white; font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8); /* Bóng đổ mạnh */
+        }
         
-        .section-title { font-size: 2.5rem; margin-bottom: 20px; position: relative; display: inline-block; }
-        .section-title::before {
-            content: ''; position: absolute; width: 60px; height: 3px; background: var(--gold);
-            top: -15px; left: 0;
-        }
+        .hero p { color: #f0f0f0; font-size: 1.2rem; margin-bottom: 30px; text-shadow: 1px 1px 3px black; max-width: 700px; margin-left: auto; margin-right: auto;}
 
-        /* --- 5. PRODUCTS (SẢN PHẨM CAO CẤP) --- */
-        .products-section { background-color: #f4f1ea; }
+        /* --- 4. GIỚI THIỆU CHI TIẾT --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-img img { width: 100%; border-radius: 10px; box-shadow: 20px 20px 0 var(--secondary); }
+        .feature-list { margin-top: 20px; }
+        .feature-item { display: flex; align-items: start; gap: 15px; margin-bottom: 15px; }
+        .feature-item i { color: var(--accent); font-size: 1.2rem; margin-top: 5px; }
+
+        /* --- 5. QUY TRÌNH (TIMELINE) --- */
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+        .step-item { position: relative; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .step-item:hover { transform: translateY(-10px); }
+        .step-icon { width: 80px; height: 80px; background: var(--bg-light); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--primary); border: 2px solid var(--primary); }
+        .step-num { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; font-weight: bold; }
+
+        /* --- 6. DINH DƯỠNG & CÁCH DÙNG --- */
+        .usage-section { background: var(--primary); color: white; }
+        .usage-section h2 { color: var(--gold); }
+        .usage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .usage-card { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); }
+        .usage-card h3 { color: white; font-family: 'Montserrat', sans-serif; margin-bottom: 15px; font-size: 1.2rem; }
+
+        /* --- 7. SẢN PHẨM --- */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .product-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; border: 1px solid #eee; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .p-img { height: 280px; overflow: hidden; position: relative; }
+        .p-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover .p-img img { transform: scale(1.1); }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--accent); color: white; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; border-radius: 3px; }
+        .p-info { padding: 20px; text-align: center; }
+        .p-price { color: var(--accent); font-size: 1.3rem; font-weight: 700; margin: 10px 0; }
+        .p-desc { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+
+        /* --- 8. FEEDBACK & FAQ --- */
+        .testimonial { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .stars { color: var(--gold); margin-bottom: 10px; }
         
-        .product-card {
-            background: white;
-            transition: 0.4s;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
+        .faq-item { background: white; margin-bottom: 10px; padding: 20px; border-radius: 5px; cursor: pointer; border-left: 5px solid var(--primary); }
+        .faq-question { font-weight: 600; display: flex; justify-content: space-between; }
+        .faq-answer { display: none; margin-top: 15px; color: #555; font-size: 0.95rem; }
+        .faq-item.active .faq-answer { display: block; }
 
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        
-        .p-img-container { height: 300px; overflow: hidden; position: relative; }
-        .p-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        .product-card:hover .p-img-container img { transform: scale(1.1); }
-        
-        .p-details { padding: 25px; text-align: center; }
-        .p-name { font-size: 1.4rem; font-family: 'Playfair Display'; margin-bottom: 10px; }
-        .p-price { color: var(--accent); font-weight: 600; font-size: 1.1rem; }
-        .p-action {
-            margin-top: 15px;
-            opacity: 0; transform: translateY(20px); transition: 0.4s;
-        }
-        .product-card:hover .p-action { opacity: 1; transform: translateY(0); }
+        /* --- 9. LIÊN HỆ & FOOTER --- */
+        .contact-box { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        footer { background: #2c2c2c; color: #ccc; padding: 60px 0 20px; margin-top: 50px; }
+        .footer-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #444; padding-bottom: 40px; }
+        .footer h3 { color: white; margin-bottom: 20px; font-size: 1.2rem; }
+        .social-icons a { color: white; font-size: 1.5rem; margin-right: 15px; }
 
-        /* --- 6. STATS & CERTIFICATES --- */
-        .stats {
-            background: var(--primary); color: white; padding: 60px 10%;
-            display: flex; justify-content: space-around; text-align: center;
-        }
-        .stat-num { font-size: 3rem; font-family: 'Playfair Display'; color: var(--gold); }
-        .stat-label { font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; }
-
-        /* --- 7. FOOTER --- */
-        footer {
-            background: #221E1D; color: #aaa; padding: 80px 10% 30px;
-        }
-        .footer-grid {
-            display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 50px;
-            border-bottom: 1px solid #333; padding-bottom: 50px;
-        }
-        .footer-logo { color: white; font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 20px; display: block; }
-        .footer h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: #aaa; }
-        .footer-links a:hover { color: var(--gold); padding-left: 5px; }
-
-        /* --- RESPONSIVE --- */
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .nav-links { display: none; } /* Ẩn menu trên mobile cho gọn (thực tế sẽ cần làm nút burger) */
-            .hero h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .section-padding { padding: 60px 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .about-grid, .usage-grid, .footer-cols { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; } /* 2 cột trên mobile */
+            
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed; top: 60px; right: -100%; width: 70%; height: 100vh;
+                background: white; flex-direction: column; padding: 50px 20px;
+                transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active { right: 0; }
         }
     </style>
 </head>
 <body>
 
-    <header id="header">
-        <a href="#" class="logo">TƯƠNG LÀNG BỢ</a>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#about">Câu Chuyện</a></li>
-                <li><a href="#products">Sản Phẩm</a></li>
-                <li><a href="#process">Quy Trình</a></li>
-                <li><a href="#contact">Liên Hệ</a></li>
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">TƯƠNG LÀNG BỢ</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" onclick="toggleMenu()">Câu chuyện</a></li>
+                <li><a href="#process" onclick="toggleMenu()">Quy trình</a></li>
+                <li><a href="#products" onclick="toggleMenu()">Sản phẩm</a></li>
+                <li><a href="#usage" onclick="toggleMenu()">Góc bếp</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Liên hệ</a></li>
             </ul>
-        </nav>
+            <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </div>
     </header>
 
     <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
-            <span class="hero-subtitle">Di Sản Phú Thọ</span>
-            <h1>Tinh Hoa Ẩm Thực<br>Đất Tổ Vua Hùng</h1>
-            <p style="margin-bottom: 30px;">Hương vị truyền thống từ năm 19xx - Thơm ngon, Đậm đà, Thuần khiết.</p>
-            <a href="#products" class="btn-gold">Khám Phá Bộ Sưu Tập</a>
+        <div class="overlay"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-title-box">
+                <span class="hero-subtitle">Di Sản Văn Hóa Phú Thọ</span>
+            </div>
+            <h1>Vị Ngọt Đậm Đà<br>Từ Hạt Đỗ Tương Rang</h1>
+            <p>100% Lên men tự nhiên theo phương pháp cổ truyền Thạch Đồng.<br>Sản phẩm đạt chuẩn OCOP 3 sao - An toàn - Không chất bảo quản.</p>
+            <div style="margin-top: 30px;">
+                <a href="#products" class="btn btn-primary">MUA NGAY</a>
+                <a href="#about" class="btn btn-outline" style="color: white; border-color: white; margin-left: 10px;">XEM CÂU CHUYỆN</a>
+            </div>
         </div>
     </section>
 
     <section id="about" class="section-padding">
-        <div class="about-grid">
-            <div class="about-text" data-aos="fade-right">
-                <h2 class="section-title">Hồn Quê Trong Chum Sành</h2>
-                <p style="margin-bottom: 20px; font-size: 1.1rem; color: #555;">
-                    "Nhất Kinh kỳ, nhì Bợ Bạt". Lời xưa truyền tụng về vị ngon của Tương Bợ (Thạch Đồng) chưa bao giờ là hư danh.
-                </p>
-                <p style="margin-bottom: 20px;">
-                    Tại Hợp Tác Xã của chúng tôi, mỗi giọt tương là kết tinh của sự kiên nhẫn. Chúng tôi từ chối sự vội vã của công nghiệp. Gạo phải là nếp cái hoa vàng đồ xôi dẻo thơm, đỗ tương phải rang vàng hạ thổ đúng điệu, và nước phải lấy từ mạch ngầm trong mát.
-                </p>
-                <div style="margin-top: 30px;">
-                    <img src="https://dulichtaybac.vn/wp-content/uploads/2021/07/c-Phuong.jpg" width="80" alt="OCOP">
+        <div class="container">
+            <div class="about-grid">
+                <div data-aos="fade-right">
+                    <h2>"Nhất Kinh kỳ, Nhì Bợ Bạt"</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 20px; font-weight: 500;">
+                        Tương Làng Bợ (Thạch Đồng) không chỉ là nước chấm, đó là niềm tự hào của người dân Đất Tổ.
+                    </p>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        Khác với tương Bần hay tương Cự Đà, Tương Làng Bợ có vị ngọt rất riêng nhờ nguồn nước giếng khơi mát lành và bí quyết "rang đỗ" độc nhất vô nhị. Chúng tôi không chạy theo sản lượng công nghiệp. Tại đây, mỗi chum tương là một tác phẩm nghệ thuật cần 3-6 tháng để hoàn thiện.
+                    </p>
+                    <div class="feature-list">
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> <span><strong>Nguyên liệu sạch:</strong> Gạo nếp cái hoa vàng & Đỗ tương hạt tiêu.</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> <span><strong>Lên men tự nhiên:</strong> Không dùng axit hay chất tạo ngọt.</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> <span><strong>Hương vị nguyên bản:</strong> Thơm nồng, béo ngậy, màu vàng cánh gián.</span></div>
+                    </div>
                 </div>
-            </div>
-            <div class="about-img-box" data-aos="fade-left">
-                <img src="https://dulichtaybac.vn/wp-content/uploads/2021/07/c-Phuong.jpg?q=80&w=800" alt="Nghệ nhân làm tương">
+                <div class="about-img" data-aos="fade-left">
+                    <img src="https://dulichtaybac.vn/wp-content/uploads/2021/07/c-Phuong.jpg" alt="Nghệ nhân làm tương">
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="stats" data-aos="fade-up">
-        <div>
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Thủ Công</div>
+    <section id="process" class="section-padding" style="background: #fff;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quy Trình 5 Bước Khắt Khe</h2>
+                <p>Từ hạt gạo đến giọt tương vàng là cả một hành trình của nắng, gió và tâm huyết.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-num">1</div>
+                    <div class="step-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Tuyển Chọn</h3>
+                    <p>Chỉ chọn gạo nếp cái hoa vàng hạt mẩy và đỗ tương loại 1.</p>
+                </div>
+                <div class="step-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-num">2</div>
+                    <div class="step-icon"><i class="fas fa-fire-alt"></i></div>
+                    <h3>Đồ Xôi & Rang Đỗ</h3>
+                    <p>Gạo đồ thành xôi dẻo. Đỗ rang vàng giòn tan trên lửa hồng.</p>
+                </div>
+                <div class="step-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-num">3</div>
+                    <div class="step-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Ủ Mốc Mật</h3>
+                    <p>Nuôi nấm mốc tự nhiên trong 3-5 ngày để tạo men vi sinh có lợi.</p>
+                </div>
+                <div class="step-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-num">4</div>
+                    <div class="step-icon"><i class="fas fa-sun"></i></div>
+                    <h3>Ngả Tương & Phơi</h3>
+                    <p>Ủ trong chum sành, phơi nắng 3-6 tháng để tương "chín" ngấu.</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <div class="stat-num">30+</div>
-            <div class="stat-label">Năm Gia Truyền</div>
-        </div>
-        <div>
-            <div class="stat-num">★★★★★</div>
-            <div class="stat-label">OCOP 5 Sao</div>
-        </div>
-    </div>
+    </section>
 
-    <section id="products" class="section-padding products-section">
-        <div style="text-align: center; margin-bottom: 60px;" data-aos="fade-up">
-            <span style="color: var(--accent); font-weight: 600; letter-spacing: 2px;">CỬA HÀNG TRỰC TUYẾN</span>
-            <h2 class="section-title" style="margin-top: 10px;">Tuyệt Phẩm Tương Bợ</h2>
+    <section id="usage" class="section-padding usage-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Giá Trị Dinh Dưỡng & Ẩm Thực</h2>
+                <p style="color: #ddd;">Tương không chỉ ngon mà còn rất lành.</p>
+            </div>
+            <div class="usage-grid">
+                <div class="usage-card" data-aos="zoom-in">
+                    <i class="fas fa-heartbeat" style="font-size: 2rem; color: var(--gold); margin-bottom: 15px;"></i>
+                    <h3>Tốt Cho Sức Khỏe</h3>
+                    <p>Chứa nhiều đạm thực vật dễ tiêu hóa và các lợi khuẩn (Probiotics) từ quá trình lên men, giúp đường ruột khỏe mạnh.</p>
+                </div>
+                <div class="usage-card" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-utensils" style="font-size: 2rem; color: var(--gold); margin-bottom: 15px;"></i>
+                    <h3>Chấm Rau & Thịt</h3>
+                    <p>Là nước chấm "quốc dân" cho rau muống luộc, cà pháo, thịt bê hấp, thịt dê tái chanh. Vị ngọt của tương làm dậy vị món ăn.</p>
+                </div>
+                <div class="usage-card" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-fish" style="font-size: 2rem; color: var(--gold); margin-bottom: 15px;"></i>
+                    <h3>Kho Cá Trứ Danh</h3>
+                    <p>Dùng tương để kho cá (cá trắm, cá chép) giúp khử tanh hoàn toàn, thịt cá chắc, xương mềm rục và màu sắc cực đẹp.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="about-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+    <section id="products" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sản Phẩm Của Chúng Tôi</h2>
+                <p>Đa dạng quy cách đóng gói - Phù hợp tiêu dùng & Quà biếu</p>
+            </div>
             
-            <div class="product-card" data-aos="zoom-in" data-aos-delay="100">
-                <div class="p-img-container">
-                    <img src="https://lh3.googleusercontent.com/gg/AIJ2gl86GeYlhV00FdHg8oqUs4NowlsbINlBZVeIxYIBhV2auDCe4aUNCZ6dKsVfwKv69nkCdC6j-QH_AuJEtUJS3xGlMAvSkVcRgiOYiQ8NN-_K06NGbc735oKACTfA5sSpqtEiocvODczVqeTXiZUXIYShqhuNiko0a3pAdJK-HtJjtF-r9WZq=s1024-rj-mp2" alt="Chai 500ml">
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="p-img">
+                        <span class="badge">BÁN CHẠY</span>
+                        <img src="https://lh3.googleusercontent.com/gg/AIJ2gl86GeYlhV00FdHg8oqUs4NowlsbINlBZVeIxYIBhV2auDCe4aUNCZ6dKsVfwKv69nkCdC6j-QH_AuJEtUJS3xGlMAvSkVcRgiOYiQ8NN-_K06NGbc735oKACTfA5sSpqtEiocvODczVqeTXiZUXIYShqhuNiko0a3pAdJK-HtJjtF-r9WZq=s1024-rj-mp2" alt="Chai nhựa 500ml">
+                    </div>
+                    <div class="p-info">
+                        <h3>Tương Nếp Chai 500ml</h3>
+                        <div class="p-price">35.000đ</div>
+                        <p class="p-desc">Chai nhựa tiện lợi. Phù hợp cho bữa ăn hàng ngày của gia đình nhỏ.</p>
+                        <a href="#contact" class="btn btn-primary" style="width: 100%; font-size: 0.9rem;">ĐẶT HÀNG NGAY</a>
+                    </div>
                 </div>
-                <div class="p-details">
-                    <h3 class="p-name">Tương Nếp 500ml</h3>
-                    <div class="p-price">30.000 VNĐ</div>
-                    <div class="p-action">
-                        <a href="https://zalo.me/0335471477" class="btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">Mua Ngay</a>
+                <div class="product-card">
+                    <div class="p-img">
+                        <span class="badge">BÁN CHẠY</span>
+                        <img src="https://lh3.googleusercontent.com/gg/AIJ2gl8zrWSF0vsQ48VfXjpD28hQFG5bAHul-ys7dlhNXLuwmUVjNaljoTX0SkoNPjaa3GijPETV6TLmXrbXiMdsq06QhwGTqez7kiaewKR8GRlq4PhWBuoWrrgFwTcjDeaA7g1ibfTZv5HNZEsztSV40_utnMzwqUo_VteSdnqvs__1GyySgZSG=s1024-rj-mp2" alt="Lọ thủy tinh 500ml">
+                    </div>
+                    <div class="p-info">
+                        <h3>Lọ Thủy tinh</h3>
+                        <div class="p-price">60.000đ</div>
+                        <p class="p-desc">Lọ thủy tinh trạng trọng dùng làm quà biếu tặng người thân.</p>
+                        <a href="#contact" class="btn btn-primary" style="width: 100%; font-size: 0.9rem;">ĐẶT HÀNG NGAY</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="p-img">
+                        <span class="badge" style="background: var(--primary);">CAO CẤP</span>
+                        <img src="https://lh3.googleusercontent.com/gg/AIJ2gl8XF3SqyGejBPALLAu_li_n4VZJ7w56TY7hAOh3ta8fU_FEV8bAECgdeg9S4KG6X38juoImVgD9qHNRr1x-r6et_KNgYKz3ILQjUX69wlB88UystX1DLuXTm5v3odJDOl3AEiVCaxS2EaCfCJvLdy9VL8fw2iEag_OhcopdG8_TgD41i4tC=s1024-rj-mp2" alt="Chum Sành Quà Biếu">
+                    </div>
+                    <div class="p-info">
+                        <h3>Set quà cao cấp</h3>
+                        <div class="p-price">Liên Hệ</div>
+                        <p class="p-desc">Tương cốt đậm đặc ủ trên 1 năm, đựng trong hộp gỗ chạm khắc tên sang trọng.</p>
+                        <a href="#contact" class="btn btn-primary" style="width: 100%; font-size: 0.9rem;">NHẬN BÁO GIÁ</a>
                     </div>
                 </div>
             </div>
-
-            <div class="product-card" data-aos="zoom-in" data-aos-delay="200">
-                <div class="p-img-container">
-                    <img src="https://lh3.googleusercontent.com/gg/AIJ2gl8zrWSF0vsQ48VfXjpD28hQFG5bAHul-ys7dlhNXLuwmUVjNaljoTX0SkoNPjaa3GijPETV6TLmXrbXiMdsq06QhwGTqez7kiaewKR8GRlq4PhWBuoWrrgFwTcjDeaA7g1ibfTZv5HNZEsztSV40_utnMzwqUo_VteSdnqvs__1GyySgZSG=s1024-rj-mp2" alt="Bản đặc biệt quà tặng">
-                    <div style="position: absolute; top: 10px; right: 10px; background: var(--accent); color: white; padding: 5px 10px; font-size: 0.8rem;">BÁN CHẠY</div>
-                </div>
-                <div class="p-details">
-                    <h3 class="p-name">Phiên bản dạng lọ thủy tinh</h3>
-                    <div class="p-price">80.000 VNĐ</div>
-                    <div class="p-action">
-                        <a href="https://zalo.me/0335471477" class="btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">Mua Ngay</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-aos="zoom-in" data-aos-delay="300">
-                <div class="p-img-container">
-                    <img src="https://lh3.googleusercontent.com/gg/AIJ2gl8XF3SqyGejBPALLAu_li_n4VZJ7w56TY7hAOh3ta8fU_FEV8bAECgdeg9S4KG6X38juoImVgD9qHNRr1x-r6et_KNgYKz3ILQjUX69wlB88UystX1DLuXTm5v3odJDOl3AEiVCaxS2EaCfCJvLdy9VL8fw2iEag_OhcopdG8_TgD41i4tC=s1024-rj-mp2" alt="Chum Quà Biếu">
-                </div>
-                <div class="p-details">
-                    <h3 class="p-name">Bản đặc biệt Quà Biếu</h3>
-                    <div class="p-price">Liên hệ</div>
-                    <div class="p-action">
-                        <a href="https://zalo.me/0335471477" class="btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">Tư Vấn</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <section id="contact" style="position: relative;">
-        <div style="height: 500px; width: 100%;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.687786419519!2d105.2831873154035!3d21.16481798592497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b3769917d69%3A0x6a0314d3f232462!2zTHhMgW5nIE5naOG7gSBUxrDGoW5nIELhu6M!5e0!3m2!1svi!2s!4v1650000000000!5m2!1svi!2s" 
-            width="100%" height="100%" style="border:0; filter: grayscale(20%) contrast(1.2);" allowfullscreen="" loading="lazy"></iframe>
+    <section class="section-padding" style="background: #f9f9f9;">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h3 style="margin-bottom: 20px;">Khách Hàng Nói Gì?</h3>
+                    <div class="testimonial">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p>"Tương rất thơm, chuẩn vị ngày xưa bà mình hay làm. Kho cá thì tuyệt vời, không bị mặn gắt như tương công nghiệp."</p>
+                        <p style="margin-top: 15px; font-weight: bold;">- Chị Lan (Hà Nội)</p>
+                    </div>
+                    <div class="testimonial">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p>"Mua về biếu bố vợ thích lắm. Bao bì đẹp, tem nhãn OCOP rõ ràng nên rất yên tâm."</p>
+                        <p style="margin-top: 15px; font-weight: bold;">- Anh Tuấn (Việt Trì)</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="margin-bottom: 20px;">Câu Hỏi Thường Gặp</h3>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Tương để được bao lâu? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Tương Làng Bợ càng để lâu càng ngon (ngấu). Nếu bảo quản nơi thoáng mát, đậy kín nắp, tương có thể dùng tốt trong 12-24 tháng.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Có ship hàng đi tỉnh không? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Chúng tôi ship COD toàn quốc. Chai nhựa/can nhựa vận chuyển an toàn. Chum sành sẽ được bọc chống sốc kỹ càng.</div>
+                    </div>
+                    <div class="faq-item" onclick="this.classList.toggle('active')">
+                        <div class="faq-question">Tương có bị mặn không? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Tương Bợ có vị mặn dịu của muối biển hòa quyện với vị ngọt đạm của đỗ tương, tạo nên vị ngọt hậu (Umami) rất hài hòa, không mặn chát.</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div style="position: absolute; top: 50%; left: 10%; transform: translateY(-50%); background: white; padding: 40px; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);" data-aos="fade-right">
-            <h3 style="margin-bottom: 20px;">Liên Hệ Hợp Tác Xã</h3>
-            <p style="margin-bottom: 15px;"><i class="fas fa-map-marker-alt" style="color: var(--accent); width: 20px;"></i> 6836+J28, Thạch Đồng, Thanh Thủy, Phú Thọ</p>
-            <p style="margin-bottom: 15px;"><i class="fas fa-phone" style="color: var(--accent); width: 20px;"></i> 0335.471.477</p>
-            <p style="margin-bottom: 30px;"><i class="fas fa-envelope" style="color: var(--accent); width: 20px;"></i> htx.langbo@gmail.com</p>
-            <a href="tel:0335471477" class="btn-gold" style="width: 100%; text-align: center;">GỌI NGAY</a>
+    </section>
+
+    <section id="contact" class="section-padding" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Liên Hệ Mua Hàng</h2>
+                <p>Ghé thăm cơ sở hoặc đặt hàng Online ngay hôm nay</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="contact-box">
+                    <h3>Hợp Tác Xã Tương Làng Bợ</h3>
+                    <p style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> 
+                        6836+J28, Thạch Đồng, Thanh Thủy, Phú Thọ
+                    </p>
+                    <p style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-phone-alt" style="color: var(--accent);"></i> 
+                        <a href="tel:0335471477" style="color: var(--text);">0335.471.477 (Hotline/Zalo)</a>
+                    </p>
+                    <p style="margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-envelope" style="color: var(--accent);"></i> 
+                        htx.langbo@gmail.com
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <a href="tel:0335471477" class="btn btn-primary" style="text-align: center;"><i class="fas fa-phone"></i> GỌI NGAY</a>
+                        <a href="https://zalo.me/0335471477" class="btn btn-outline" style="text-align: center;"><i class="fas fa-comment"></i> CHAT ZALO</a>
+                    </div>
+                </div>
+
+                <div style="height: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.687786419519!2d105.2831873154035!3d21.16481798592497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b3769917d69%3A0x6a0314d3f232462!2zTHhMgW5nIE5naOG7gSBUxrDGoW5nIELhu6M!5e0!3m2!1svi!2s!4v1650000000000!5m2!1svi!2s" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-grid">
-            <div>
-                <a href="#" class="footer-logo">TƯƠNG LÀNG BỢ</a>
-                <p style="line-height: 1.8;">Chúng tôi cam kết gìn giữ hương vị truyền thống, mang đến những bữa ăn ngon và an toàn cho mọi gia đình Việt.</p>
-            </div>
-            <div>
-                <h4>Liên Kết Nhanh</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Về Chúng Tôi</a></li>
-                    <li><a href="#">Sản Phẩm</a></li>
-                    <li><a href="#">Chính Sách</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Kết Nối</h4>
-                <div style="display: flex; gap: 15px;">
-                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
-                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-tiktok"></i></a>
+        <div class="container">
+            <div class="footer-cols">
+                <div>
+                    <h3>VỀ CHÚNG TÔI</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.8;">
+                        Hợp Tác Xã Tương Làng Bợ cam kết gìn giữ và phát triển nghề truyền thống cha ông. 
+                        Chúng tôi mang đến những sản phẩm sạch, an toàn, đậm đà bản sắc Việt.
+                    </p>
+                </div>
+                <div>
+                    <h3>LIÊN KẾT</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><a href="#about" style="color: #ccc; text-decoration: none;">Câu chuyện thương hiệu</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#products" style="color: #ccc; text-decoration: none;">Sản phẩm & Báo giá</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">Chứng nhận OCOP</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>KẾT NỐI</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.8rem;">GPKD số: 0123456789<br>Cấp bởi Sở KHĐT Tỉnh Phú Thọ</p>
                 </div>
             </div>
-        </div>
-        <div style="text-align: center; border-top: 1px solid #333; padding-top: 30px;">
-            <p>&copy; 2024 Hợp Tác Xã Tương Làng Bợ. Designed for Excellence.</p>
+            <div style="text-align: center; border-top: 1px solid #444; padding-top: 20px; font-size: 0.8rem;">
+                © 2024 Tương Làng Bợ. Designed by Lê Minh Đức - K23 QTKD B HVU.
+            </div>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. Kích hoạt thư viện hiệu ứng cuộn trang (AOS)
-        AOS.init({
-            once: true, // Hiệu ứng chỉ chạy 1 lần khi cuộn xuống
-            offset: 100, // Kích hoạt sớm hơn một chút
-        });
+        AOS.init({ once: true, offset: 100, duration: 800 });
 
-        // 2. Hiệu ứng đổi màu Menu khi cuộn (Sticky Header)
-        window.addEventListener("scroll", function(){
-            var header = document.querySelector("header");
-            header.classList.toggle("scrolled", window.scrollY > 50);
-        });
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
